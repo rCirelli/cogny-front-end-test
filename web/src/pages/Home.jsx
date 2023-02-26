@@ -1,12 +1,10 @@
 import styled from "styled-components";
+import Header from "../components/Header";
+import ProductCard from "../components/ProductCard";
 
 function Home() {
-  const Title = styled.h1`
-    text-transform: uppercase;
-  `
-
-  return ( 
-    <Title>Cognyshoes</Title>
+  return (
+      <Header />
   );
 }
 
