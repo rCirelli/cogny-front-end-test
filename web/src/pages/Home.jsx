@@ -1,11 +1,13 @@
-import styled from "styled-components";
 import Header from "../components/Header";
-import ProductCard from "../components/ProductCard";
+import ProductsList from "../components/ProductsList";
 
 function Home() {
   return (
+    <>
       <Header />
-  );
+      <ProductsList />
+    </>
+  )
 }
 
 export default Home;
