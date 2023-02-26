@@ -2,15 +2,15 @@ import Wrapper from './components/Wrapper';
 import Home from './pages/Home';
 import { createGlobalStyle } from 'styled-components'
 
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+`
 function App() {
-  const GlobalStyle = createGlobalStyle`
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', sans-serif;
-    }
-  `
 
   return (
     <main>
