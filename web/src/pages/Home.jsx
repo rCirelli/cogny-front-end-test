@@ -1,6 +1,12 @@
+import styled from "styled-components";
+
 function Home() {
+  const Title = styled.h1`
+    text-transform: uppercase;
+  `
+
   return ( 
-    <h1>Cognyshoes</h1>
+    <Title>Cognyshoes</Title>
   );
 }
 
