@@ -4,6 +4,7 @@ import AddToCart from "./AddToCart";
 const Card = styled.div`
   width: 300px;
   height: 442px;
+  max-width: 100%;
   background-color: white;
   padding: 20px;
   display: flex;
@@ -19,6 +20,15 @@ const Image = styled.img`
 `
 
 const Description = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  /* text-overflow: ellipsis; */
+  /* word-wrap: break-word; */
+  overflow: hidden;
+  max-height: 42px;
+  line-height: 21px;
   font-size: 1rem;
   font-weight: 600;
   color: #333;
