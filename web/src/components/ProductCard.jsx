@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import AddToCart from "./AddToCart";
+import context from '../context'
+import { useContext } from "react";
 
 const Card = styled.div`
   width: 300px;
@@ -41,12 +43,18 @@ const Price = styled.p`
 `
 
 function ProductCard({product}) {
+  const { handleAddToCart } = useContext(context);
+
+  function handleClick() {
+    handleAddToCart(product);
+  }
+
   return (
     <Card>
-      <Image src={product.img_url} alt={product.description} width/>
+      <Image src={product.img_url} alt={product.description} />
       <Description>{product.description}</Description>
       <Price>R$ {product.price}</Price>
-      <AddToCart>Adicionar ao Carrinho</AddToCart>
+      <AddToCart onClick={ handleClick }>Adicionar ao Carrinho</AddToCart>
     </Card>
   );
 }

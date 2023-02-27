@@ -36,9 +36,9 @@ const Text = styled.span`
   white-space: nowrap;
 `
 
-function AddToCart({product}) {
+function AddToCart({onClick}) {
   return (
-    <Button>
+    <Button onClick={onClick}>
       <Count>1</Count>
       <Text>Adicionar ao Carrinho</Text>
     </Button>
