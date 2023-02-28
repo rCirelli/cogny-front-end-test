@@ -1,6 +1,8 @@
 import Wrapper from './components/Wrapper';
 import Home from './pages/Home';
+import Cart from './pages/Cart';
 import { createGlobalStyle } from 'styled-components'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -24,13 +26,25 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 8px;
   }
 `
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+  },
+  {
+    path: '/cart',
+    element: <Cart />,
+  },
+]);
+
 function App() {
 
   return (
     <main>
       <GlobalStyle />
       <Wrapper>
-        <Home />
+        <RouterProvider router={router} />
       </Wrapper>
     </main>
   );
