@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getProducts } from '../firebase/SDK.js'
+import { getProducts } from "../firebase/services";
 import ProductCard from "./ProductCard";
 
 const Container = styled.div`

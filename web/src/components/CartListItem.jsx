@@ -72,7 +72,7 @@ function CartListItem({ item: { description, imgUrl, price, qty } }) {
       </InfoWrapper>
 
       <PriceWrapper>
-        <Qty value={qty}/>
+        <Qty value={qty} readOnly/>
         <Price>R$ {price * qty}</Price>
       </PriceWrapper>
     </Container>

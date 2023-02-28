@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import Context from './index';
 import useLocalStorage from '../hooks/useLocalStorage';
-import { addToCart, deleteCart, getCart } from "../firebase/SDK.js";
+import { addToCart, deleteCart, getCart } from "../firebase/services";
 
 function Provider({ children }) {
   const initialCartState = useMemo(() => ({ items: [], totalPrice: 0, totalQty: 0 }), []);
