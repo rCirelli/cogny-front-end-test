@@ -16,6 +16,9 @@ const Button = styled.button`
   cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
+  &:disabled{
+    background: #6d686a;
+  }
 `
 
 const Count = styled.span`
@@ -26,7 +29,7 @@ const Count = styled.span`
   width: 53px;
   height: 42px;
   border-radius: 4px 0 0 4px;
-  background: #c62749;
+  background: ${props => props.disabled ? "#464444" : "#c62749"};
 `
 
 const Text = styled.span`
@@ -36,10 +39,10 @@ const Text = styled.span`
   white-space: nowrap;
 `
 
-function AddToCart({onClick}) {
+function AddToCart({onClick, isDisabled}) {
   return (
-    <Button onClick={onClick}>
-      <Count>1</Count>
+    <Button onClick={onClick} disabled={isDisabled}>
+      <Count disabled={isDisabled}>1</Count>
       <Text>Adicionar ao Carrinho</Text>
     </Button>
   );

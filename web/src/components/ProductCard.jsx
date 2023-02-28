@@ -43,10 +43,17 @@ const Price = styled.p`
 `
 
 function ProductCard({product}) {
-  const { handleAddToCart } = useContext(context);
+  const { handleAddToCart, localCart: { items } } = useContext(context);
 
   function handleClick() {
     handleAddToCart(product);
+  }
+
+  function isDisabled() {
+    if(items.find(item => item.description === product.description)) {
+      return true;
+    }
+    return false;
   }
 
   return (
@@ -54,7 +61,7 @@ function ProductCard({product}) {
       <Image src={product.img_url} alt={product.description} />
       <Description>{product.description}</Description>
       <Price>R$ {product.price}</Price>
-      <AddToCart onClick={ handleClick }>Adicionar ao Carrinho</AddToCart>
+      <AddToCart onClick={ handleClick } isDisabled={isDisabled()}>Adicionar ao Carrinho</AddToCart>
     </Card>
   );
 }

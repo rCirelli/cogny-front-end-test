@@ -4,7 +4,8 @@ import Context from './index';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 function Provider({ children }) {
-  const [localCart, setLocalCart] = useLocalStorage('cart', { items: [], totalPrice: 0, totalQty: 0 });
+  const initialCartState = { items: [], totalPrice: 0, totalQty: 0 }
+  const [localCart, setLocalCart] = useLocalStorage('cart', initialCartState);
 
   function calculateCartTotals(cartItems) {
     const totalPrice = Number(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2));
