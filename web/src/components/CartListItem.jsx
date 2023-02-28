@@ -60,11 +60,11 @@ const Price = styled.p`
   color: #000;
 `
 
-function CartListItem({ item: { description, img_url, price, qty } }) {
+function CartListItem({ item: { description, imgUrl, price, qty } }) {
   return (
     <Container>
       <InfoWrapper>
-        <Image src={img_url} alt={description} />
+        <Image src={imgUrl} alt={description} />
         <Wrapper>
           <Description>{description}</Description>
           <Price>R$ {price}</Price>

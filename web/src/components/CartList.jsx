@@ -69,7 +69,6 @@ function CartList() {
   const { localCart, resetCart } = useContext(context);
 
   function handleCheckout() {
-    console.log('teste');
     resetCart();
     alert("Pedido Finalizado!")
   }

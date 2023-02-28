@@ -25,8 +25,8 @@ function ProductsList() {
   return (
     <Container>
       {
-        products.length > 0 && products.map((product, i) => (
-        <ProductCard key={i} product={product} />))
+        products.length > 0 ? products.map((product, i) => (
+        <ProductCard key={i} product={product} />)) : null
       }
     </Container>
   );

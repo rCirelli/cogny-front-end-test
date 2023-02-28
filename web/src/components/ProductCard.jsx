@@ -58,7 +58,7 @@ function ProductCard({product}) {
 
   return (
     <Card>
-      <Image src={product.img_url} alt={product.description} />
+      <Image src={product.imgUrl} alt={product.description} />
       <Description>{product.description}</Description>
       <Price>R$ {product.price}</Price>
       <AddToCart onClick={ handleClick } isDisabled={isDisabled()}>Adicionar ao Carrinho</AddToCart>
