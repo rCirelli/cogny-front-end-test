@@ -17,8 +17,8 @@ function Provider({ children }) {
   }, []);
 
   function calculateCartTotals(cartItems) {
-    const totalPrice = Number(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2));
-    const totalQty = cartItems.reduce((acc, item) => acc + item.qty, 0);
+    const totalPrice = Number(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)) || 0;
+    const totalQty = cartItems.reduce((acc, item) => acc + item.qty, 0) || 0;
     return { totalPrice, totalQty }
   }
 
@@ -34,7 +34,9 @@ function Provider({ children }) {
 
     const { totalPrice, totalQty } = calculateCartTotals(currentCart.items);
     setLocalCart({ ...currentCart, totalPrice, totalQty });
-    addToCart(product.id);
+
+    const addedProduct = currentCart.items.at(productIndex);
+    addToCart(addedProduct);
   }
 
   function resetCart() {

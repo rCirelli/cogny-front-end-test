@@ -22,31 +22,26 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-async function getProducts(ids = []) {
+async function getProducts() {
   const productsCollection = collection(db, 'products');
   const productsSnap = await getDocs(productsCollection);
   const productsList = productsSnap.docs.map(doc => {
-    const data = doc.data();
-    const product = {
+    const product = doc.data();
+    return {
       id: doc.id,
-      description: data.description,
-      price: data.price,
-      imgUrl: data.imgUrl,
+      description: product.description,
+      price: product.price,
+      imgUrl: product.imgUrl,
     };
-    return product;
   });
 
-  if (ids.length > 0) {
-    const filteredProductsList = productsList.filter(product => ids.includes(product.id));
-    return filteredProductsList;
-  }
   return productsList;
 }
 
-async function addToCart(productId) {
+async function addToCart({ id, qty }) {
   const cartCollection = collection(db, 'cart');
-  addDoc(cartCollection, { productId })
-    .then((docRef) => console.log("Adicionado com sucesso" + docRef))
+  addDoc(cartCollection, { productId: id, qty })
+    .then((docRef) => console.log("Adicionado com sucesso"))
     .catch((e) => console.log(e));
 }
 
@@ -64,9 +59,29 @@ async function deleteCart() {
 async function getCart() {
   const cartCollection = collection(db, 'cart');
   const cartSnap = await getDocs(cartCollection);
-  const productIds = cartSnap.docs.map(doc => doc.data().productId);
-  const cartProducts = await getProducts(productIds);
-  return cartProducts;
+  const cartProducts = {};
+  cartSnap.docs.forEach(doc => {
+    const { productId, qty } = doc.data();
+    cartProducts[productId] = qty;
+  });
+
+  const ids = Object.keys(cartProducts);
+  if (ids.length === 0) {
+    return [];
+  }
+  const products = (await getProducts()).filter(product => ids.includes(product.id));
+  const cart = [];
+  products.forEach((product) => {
+    const item = {
+      id: product.id,
+      qty: cartProducts[product.id],
+      description: product.description,
+      price: product.price,
+      imgUrl: product.imgUrl,
+    }
+    cart.push(item);
+  });
+  return cart;
 }
 
 export {
