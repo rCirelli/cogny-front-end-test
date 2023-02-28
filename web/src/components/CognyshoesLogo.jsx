@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -16,10 +17,12 @@ color: white;
 
 function CognyshoesLogo() {
   return (
-    <Container>
-      <Title>Cognyshoes</Title>
-      <img src="cognyshoes_logo.svg" alt="cognyshoes logo" width="50rem" />
-    </Container>
+    <NavLink to="/" style={{textDecoration: "none"}}>
+      <Container>
+        <Title>Cognyshoes</Title>
+        <img src="cognyshoes_logo.svg" alt="cognyshoes logo" width="50rem" />
+      </Container>
+    </NavLink>
   );
 }
 
