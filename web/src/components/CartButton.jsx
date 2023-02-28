@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import context from '../context'
+import { useContext } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -16,10 +18,12 @@ const Items = styled.span`
 `
 
 function CartButton() {
+  const { localCart: { totalQty } } = useContext(context);
+
   return (
     <Container>
       <MyCart>Meu carrinho</MyCart>
-      <Items>3 itens</Items>
+      <Items>{ totalQty === 1 ? '1 item' : `${totalQty} itens`}</Items>
     </Container>
   );
 }
