@@ -27,9 +27,14 @@ function Provider({ children }) {
     setLocalCart({ ...currentCart, totalPrice, totalQty });
   }
 
+  function resetCart() {
+    setLocalCart(initialCartState);
+  }
+
   const contextValue = {
     localCart, setLocalCart,
     handleAddToCart,
+    resetCart,
   }
 
   return (
