@@ -24,6 +24,7 @@ export default function ProductCard({ product: { description, price, imgUrl } })
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 20,
     backgroundColor: '#fff',
     width: 338,
     height: 358,
