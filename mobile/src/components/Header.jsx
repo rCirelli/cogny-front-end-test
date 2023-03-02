@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Logo from '../components/Logo';
 import Cart from '../components/Cart';
+import appContext from '../context/appContext'
 
 export default function App() {
+  const { cart } = useContext(appContext);
+
   return (
     <View style={styles.container}>
       <Logo />
-      <Cart qty={2}/>
+      <Cart qty={cart.items.length}/>
     </View>
   );
 }
