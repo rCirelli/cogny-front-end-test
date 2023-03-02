@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Context from './appContext';
-import { addToCart, getCart, deleteCart, } from '../firebase/services'
+import { addToCart, getCart, deleteCart, updateItemQty } from '../firebase/services'
 
 const ContextProvider = (props) => {
   const initialCartState = {
@@ -25,10 +25,25 @@ const ContextProvider = (props) => {
     return { totalPrice, totalQty }
   }
 
+  function setCartItemQty(product, newQty) {
+    const productIndex = cart.items.findIndex((item) => item.id === product.id);
+    if (productIndex === -1) {
+      return;
+    }
+    const updatedProduct = { ...product };
+    updatedProduct.qty = Number(newQty);
+    
+    const updatedCart = { ...cart };
+    updatedCart.items[productIndex] = updatedProduct;
+    const { totalPrice, totalQty } = calculateCartTotals(updatedCart.items);
+    setCart({ ...updatedCart, totalPrice, totalQty });
+    
+    return updateItemQty(updatedProduct);
+  }
+
   function handleAddToCart(product) {
     const currentCart = { ...cart };
-    console.log(currentCart);
-    const productIndex = currentCart.items.findIndex((item) => item.description === product.description);
+    const productIndex = currentCart.items.findIndex((item) => item.id === product.id);
 
     let productToAdd = {};
     if (productIndex !== -1) {
@@ -54,6 +69,7 @@ const ContextProvider = (props) => {
     cart,
     handleAddToCart,
     resetCart,
+    setCartItemQty,
   }
 
   return (
