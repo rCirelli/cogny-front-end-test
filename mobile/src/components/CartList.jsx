@@ -25,9 +25,11 @@ export default function CartList() {
   return (
     <View style={styles.container}>
       {
-        cart.items?.length > 0 ? cart.items.map(
-          (item, i) => <CartItem key={ i } product={ item }/>
-        ) : <Text style={styles.emptyCart}>Carrinho Vazio</Text>
+        cart.items?.length > 0
+        ? cart.items.map((item, i) => (
+          <CartItem key={ i } product={ item }/>
+        ))
+        : <Text style={styles.emptyCart}>Carrinho Vazio</Text>
       }
       <View>
         <View style={styles.totalWrapper}>
@@ -47,9 +49,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 10,
     alignItems: 'center',
-  },
-
-  priceWrapper: {
   },
 
   labelTotal: {
@@ -74,6 +73,7 @@ const styles = StyleSheet.create({
   },
 
   emptyCart:  {
+    fontFamily: 'Roboto',
     justifyContent: 'center',
     alignSelf: 'center',
     fontSize: 32,
