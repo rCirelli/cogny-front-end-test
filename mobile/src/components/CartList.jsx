@@ -9,28 +9,32 @@ export default function CartList() {
 
   function handleCheckout() {
     Alert.alert('Pedido Finalizado', 'Sua compra foi realizada com sucesso!', [
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
+      {text: 'OK', onPress: () => {
+        resetCart();        
+      }},
     ]);
   }
+
+  function isDisabled() {
+    if(cart.items?.length === 0) {
+      return true;
+    }
+    return false;
+  }  
   
   return (
     <View style={styles.container}>
       {
         cart.items?.length > 0 ? cart.items.map(
           (item, i) => <CartItem key={ i } product={ item }/>
-          // (item, i) => (<Text>{item.description}</Text>)
-        ) : null //<EmptyCart>Carrinho Vazio</EmptyCart>
+        ) : <Text style={styles.emptyCart}>Carrinho Vazio</Text>
       }
       <View>
-        {/* <CheckoutButton
-          onClick={handleCheckout}
-          isDisabled={isDisabled()}
-        /> */}
         <View style={styles.totalWrapper}>
           <Text style={styles.labelTotal}>Total</Text>
           <Text style={styles.total}>R$ {cart.totalPrice}</Text>
         </View>
-        <CheckoutBtn onPress={handleCheckout} />
+        <CheckoutBtn onPress={handleCheckout} disabled={isDisabled()} />
       </View>
     </View>
   );
@@ -67,5 +71,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: '800',
     textAlign: 'center',
+  },
+
+  emptyCart:  {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    fontSize: 32,
+    textAlignVertical: 'center',
+    fontWeight: '800',
+    height: 130,
+    color: '#99999960',
+    // box-shadow: 0 1px 0 #EEE;
   }
 });

@@ -1,11 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from 'react';
 
-export default function CheckoutBtn({ onPress }) {
+export default function CheckoutBtn({ onPress, disabled }) {
   return (
     <Pressable
       onPress={onPress}
-      style={styles.button}
+      style={[styles.button, disabled && styles.buttonDisabled]}
+      disabled={disabled}
     >
       <Text style={styles.text}>Finalizar Pedido</Text>
     </Pressable>
@@ -21,6 +22,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+
+  buttonDisabled: {
+    backgroundColor: '#6d686a',
   },
 
   text: {

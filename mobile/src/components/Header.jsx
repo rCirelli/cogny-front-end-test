@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Logo from '../components/Logo';
-import Cart from '../components/Cart';
 import appContext from '../context/appContext'
+import CartBtn from './CartBtn';
 
 export default function App() {
   const { cart } = useContext(appContext);
@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Logo />
-      <Cart qty={cart.items.length}/>
+      <CartBtn qty={cart.items.length}/>
     </View>
   );
 }
