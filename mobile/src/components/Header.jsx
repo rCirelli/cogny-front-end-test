@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Logo />
-      <CartBtn qty={cart.items.length}/>
+      <CartBtn qty={cart.totalQty}/>
     </View>
   );
 }
