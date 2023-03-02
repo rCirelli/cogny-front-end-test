@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontFamily: 'Roboto_700Bold',
+    fontFamily: 'Roboto',
+    fontWeight: '800',
     fontSize: 22,
     color: '#fff',
     marginRight: 10,

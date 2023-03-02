@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
 
   text: {
     flex: 2,
-    fontFamily: 'Roboto_700Bold',
+    fontFamily: 'Roboto',
+    fontWeight: '800',
     fontSize: 14,
     textTransform: 'uppercase',
     textAlign: 'center',

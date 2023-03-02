@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 
   text: {
     top: -1,
-    fontFamily: 'Roboto_400Regular',
+    fontFamily: 'Roboto',
     fontSize: 12,
     color: 'white',
     alignSelf: 'center',
