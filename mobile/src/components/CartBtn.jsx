@@ -4,7 +4,7 @@ import {
   Roboto_400Regular,
 } from '@expo-google-fonts/roboto';
 
-export default function App({ qty }) {
+export default function CartBtn({ qty }) {
   return (
     <View style={styles.container}>
       { qty > 0
