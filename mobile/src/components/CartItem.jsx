@@ -1,6 +1,16 @@
+import { useContext, useState } from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import appContext from '../context/appContext'
 
 export default function CartItem({ product }) {
+  const { setCartItemQty } = useContext(appContext);
+  const [itemQty, setItemQty] = useState(product.qty);
+
+  function handleUpdateQty(value) {
+    setItemQty(value);
+    setCartItemQty(product, value);
+  }
+
   return (
     <View>
       <View style={styles.container}>
@@ -16,9 +26,11 @@ export default function CartItem({ product }) {
       </View>
         <View style={styles.totals}>
           <TextInput
+            inputMode="numeric"
+            keyboardType="number-pad"
             style={styles.input}
-            // onChangeText={}
-            value='3'
+            onChangeText={(value) => handleUpdateQty(value)}
+            value={`${itemQty}`}
           />
           <Text style={styles.price}>R$ {product.price * product.qty}</Text>
         </View>
@@ -85,5 +97,4 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     textAlign: 'center',
   },
-
 });
