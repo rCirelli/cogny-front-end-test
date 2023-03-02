@@ -10,7 +10,7 @@ export default function CartList() {
   function handleCheckout() {
     Alert.alert('Pedido Finalizado', 'Sua compra foi realizada com sucesso!', [
       {text: 'OK', onPress: () => {
-        resetCart();        
+        resetCart();
       }},
     ]);
   }
@@ -21,7 +21,7 @@ export default function CartList() {
     }
     return false;
   }  
-  
+
   return (
     <View style={styles.container}>
       {
@@ -81,6 +81,5 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     height: 130,
     color: '#99999960',
-    // box-shadow: 0 1px 0 #EEE;
   }
 });
