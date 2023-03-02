@@ -9,8 +9,8 @@ import {
   Roboto_700Bold,
   Roboto_900Black,
 } from '@expo-google-fonts/roboto';
-
-import Loading from './src/components/Loading.jsx';
+import ContextProvider from './src/context/ContextProvider';
+// import Loading from './src/components/Loading.jsx';
 
 export default function App() {
   const [fontsLoaded, err] = useFonts({
@@ -25,11 +25,13 @@ export default function App() {
   // }
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <Header />
-      <Home />
-    </View>
+    <ContextProvider>
+      <View style={styles.container}>
+        <StatusBar style="light" />
+        <Header />
+        <Home />
+      </View>
+    </ContextProvider>
   );
 }
 
