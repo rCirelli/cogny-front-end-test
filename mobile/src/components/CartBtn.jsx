@@ -1,12 +1,20 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   Roboto_400Regular,
 } from '@expo-google-fonts/roboto';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CartBtn({ qty }) {
+  const navigation  = useNavigation()
+
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => {
+        navigation.navigate('Cart')
+      }}
+    >
       { qty > 0
         ? <View style={styles.dot}>
             <Text style={styles.text}>{ qty }</Text>
@@ -18,7 +26,7 @@ export default function CartBtn({ qty }) {
         resizeMode='contain'
         source={require("../assets/bag_icon.png")}
       />
-    </View>
+    </Pressable>
   );
 }
 

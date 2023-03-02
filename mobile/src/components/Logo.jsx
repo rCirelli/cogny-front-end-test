@@ -1,21 +1,27 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   Roboto_400Regular,
   Roboto_700Bold,
   Roboto_900Black,
 } from '@expo-google-fonts/roboto';
+import { useNavigation } from '@react-navigation/native';
 
 export default function App() {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => navigation.navigate('Home')}
+    >
       <Text style={styles.text}>COGNYSHOES</Text>
       <Image
         style={styles.logo}
         resizeMode='contain'
         source={require("../assets/cognyshoes_logo.png")}
       />
-    </View>
+    </Pressable>
   );
 }
 
