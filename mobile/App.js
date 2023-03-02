@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator, nativeStackNavigator } from '@react-navigation/native-stack';
 import Header from './src/components/Header.jsx';
 import Home from './src/Home'
 import Cart from './src/Cart.jsx'
@@ -12,6 +14,8 @@ import {
 } from '@expo-google-fonts/roboto';
 import ContextProvider from './src/context/ContextProvider';
 // import Loading from './src/components/Loading.jsx';
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   const [fontsLoaded, err] = useFonts({
@@ -26,14 +30,18 @@ export default function App() {
   // }
 
   return (
-    <ContextProvider>
-      <View style={styles.container}>
-        <StatusBar style="light" />
+    <>
+      <ContextProvider>
+      <StatusBar style="light" />
+      <NavigationContainer>
         <Header />
-        {/* <Home /> */}
-        <Cart />
-      </View>
-    </ContextProvider>
+        <Stack.Navigator initialRouteName="Home" screenOptions={{contentStyle: styles.container}}>
+          <Stack.Screen name="Home" component={Home} options={{headerShown: false}} sty/>
+          <Stack.Screen name="Cart" component={Cart} options={{headerShown: false}} sty/>
+        </Stack.Navigator>
+      </NavigationContainer>
+      </ContextProvider>
+    </>
   );
 }
 
@@ -45,9 +53,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-
-  text: {
-    color: '#fff',
-  }
-
 });
