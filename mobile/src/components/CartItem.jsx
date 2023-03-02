@@ -32,7 +32,7 @@ export default function CartItem({ product }) {
             onChangeText={(value) => handleUpdateQty(value)}
             value={`${itemQty}`}
           />
-          <Text style={styles.price}>R$ {product.price * product.qty}</Text>
+          <Text style={styles.price}>R$ {(product.price * product.qty).toFixed(2)}</Text>
         </View>
     </View>
   );

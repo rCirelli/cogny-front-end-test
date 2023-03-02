@@ -1,4 +1,6 @@
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import context from "../context";
 
 const Container = styled.div`
   display: flex;
@@ -60,20 +62,28 @@ const Price = styled.p`
   color: #000;
 `
 
-function CartListItem({ item: { description, imgUrl, price, qty } }) {
+function CartListItem({ item }) {
+  const { setCartItemQty } = useContext(context);
+  const [qtyValue, setQtyValue] = useState(item.qty);
+
+  function handleOnChange({value}) {
+    setCartItemQty(item, value);
+    setQtyValue(value);
+  }
+
   return (
     <Container>
       <InfoWrapper>
-        <Image src={imgUrl} alt={description} />
+        <Image src={item.imgUrl} alt={item.description} />
         <Wrapper>
-          <Description>{description}</Description>
-          <Price>R$ {price}</Price>
+          <Description>{item.description}</Description>
+          <Price>R$ {item.price}</Price>
         </Wrapper>
       </InfoWrapper>
 
       <PriceWrapper>
-        <Qty value={qty} readOnly/>
-        <Price>R$ {price * qty}</Price>
+        <Qty value={qtyValue} onChange={(e) => handleOnChange(e.target)} />
+        <Price>R$ {(item.price * item.qty).toFixed(2)}</Price>
       </PriceWrapper>
     </Container>
   );
