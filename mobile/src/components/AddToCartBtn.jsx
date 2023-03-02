@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   },
 
   label: {
+    fontFamily: 'Roboto',
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
     height: '100%',

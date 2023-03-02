@@ -59,11 +59,13 @@ const styles = StyleSheet.create({
 
   price: {
     fontSize: 21,
-    fontWeight: '600',
+    fontFamily: 'Roboto',
+    fontWeight: '800',
     alignSelf: 'flex-start',
   },
 
   text: {
+    fontFamily: 'Roboto',
     color: '#333',
     fontSize: 16,
     textTransform: 'capitalize',

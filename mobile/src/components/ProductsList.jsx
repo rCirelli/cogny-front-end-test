@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import { View } from "react-native";
 import ProductCard from "./ProductCard";
 import { getProducts } from '../firebase/services'
 import Loading from "./Loading";
@@ -27,6 +27,3 @@ export default function ProductsList() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-});

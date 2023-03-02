@@ -1,10 +1,5 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import {
-  Roboto_400Regular,
-  Roboto_700Bold,
-  Roboto_900Black,
-} from '@expo-google-fonts/roboto';
+import { Image, Pressable, StyleSheet, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function App() {

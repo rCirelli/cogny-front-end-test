@@ -1,8 +1,5 @@
 import React from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import {
-  Roboto_400Regular,
-} from '@expo-google-fonts/roboto';
 import { useNavigation } from '@react-navigation/native';
 
 export default function CartBtn({ qty }) {
