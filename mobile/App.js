@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Header from './src/components/Header.jsx';
 import Home from './src/Home'
+import Cart from './src/Cart.jsx'
 import {
   useFonts,
   Roboto_400Regular,
@@ -29,7 +30,8 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="light" />
         <Header />
-        <Home />
+        {/* <Home /> */}
+        <Cart />
       </View>
     </ContextProvider>
   );
