@@ -1,6 +1,12 @@
-import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
+  setDoc
+} from "firebase/firestore";
 import { db } from "./firebase";
-import { buildCart, getIdsQty } from "./helpers";
 
 async function getProducts() {
   const productsCollection = collection(db, 'products');
@@ -19,9 +25,16 @@ async function getProducts() {
 }
 
 async function addToCart({ id, qty }) {
-  const cartCollection = collection(db, 'cart');
-  addDoc(cartCollection, { productId: id, qty })
-    .then((docRef) => console.log("Adicionado com sucesso"))
+  const docRef = doc(db, 'cart', id);
+  setDoc(docRef, { qty })
+    .then(() => console.log('Adicionado com sucesso'))
+    .catch((e) => console.log(e));
+}
+
+async function updateItemQty({ id, qty }) {
+  const docRef = doc(db, 'cart', id);
+  updateDoc(docRef, { qty })
+    .then(() => true)
     .catch((e) => console.log(e));
 }
 
@@ -38,16 +51,21 @@ async function deleteCart() {
 
 async function getCart() {
   const cartCollection = collection(db, 'cart');
-  const cartSnap = await getDocs(cartCollection);
+  const [cartSnap, productsSnap] = await Promise.all([
+    getDocs(cartCollection),
+    getProducts(),
+  ]);
 
   if (cartSnap.docs.length === 0) {
     return [];
   }
 
-  const idsAndQty = getIdsQty(cartSnap);
-  const ids = Object.keys(idsAndQty);
-  const products = (await getProducts()).filter(product => ids.includes(product.id));
-  const cart = buildCart(products, idsAndQty);
+  const idsAndQty = {}
+  cartSnap.docs.forEach((doc) => idsAndQty[doc.id] = doc.data().qty);
+
+  const filteredProducts = productsSnap.filter(product => idsAndQty[product.id]);
+  const cart = filteredProducts.map((product) => ({ ...product, qty: idsAndQty[product.id]}));
+
   return cart;
 }
 
@@ -56,4 +74,5 @@ export {
   addToCart,
   deleteCart,
   getCart,
+  updateItemQty,
 }
