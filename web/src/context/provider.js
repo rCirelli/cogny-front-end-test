@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
 import Context from './index';
 import useLocalStorage from '../hooks/useLocalStorage';
-import { addToCart, deleteCart, getCart } from "../firebase/services";
+import { addToCart, deleteCart, getCart, updateItemQty } from "../firebase/services";
 
 function Provider({ children }) {
   const initialCartState = useMemo(() => ({ items: [], totalPrice: 0, totalQty: 0 }), []);
   const [localCart, setLocalCart] = useLocalStorage('cart', initialCartState);
-
+  
   useEffect(() => {
     async function loadCart() {
       const savedCart = await getCart();
@@ -14,6 +14,7 @@ function Provider({ children }) {
       setLocalCart({ items: savedCart, totalPrice, totalQty });
     }
     loadCart();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function calculateCartTotals(cartItems) {
@@ -21,6 +22,23 @@ function Provider({ children }) {
     const totalQty = cartItems.reduce((acc, item) => acc + item.qty, 0) || 0;
     return { totalPrice, totalQty }
   }
+
+  function setCartItemQty(product, newQty) {
+    const productIndex = localCart.items.findIndex((item) => item.id === product.id);
+    if (productIndex === -1) {
+      return;
+    }
+    const updatedProduct = { ...product };
+    updatedProduct.qty = Number(newQty);
+    
+    const updatedCart = { ...localCart };
+    updatedCart.items[productIndex] = updatedProduct;
+    const { totalPrice, totalQty } = calculateCartTotals(updatedCart.items);
+    setLocalCart({ ...updatedCart, totalPrice, totalQty });
+    
+    return updateItemQty(updatedProduct);
+  }
+
 
   function handleAddToCart(product) {
     const currentCart = structuredClone(localCart);
@@ -48,6 +66,7 @@ function Provider({ children }) {
     localCart, setLocalCart,
     handleAddToCart,
     resetCart,
+    setCartItemQty,
   }
 
   return (
