@@ -1,37 +1,29 @@
+import { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import ProductCard from "./ProductCard";
+import { getProducts } from '../firebase/services'
+import Loading from "./Loading";
 
 export default function ProductsList() {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsList = await getProducts();
+      setProducts(productsList);
+      setIsLoading(false);
+    }
+    fetchProducts();
+  }, []);
+
   return (
     <View>
-      <ProductCard
-        product = {{
-          description: 'TÊNIS ADIDAS CAMPUS 00S MASCULINO',
-          price: 549.99,
-          imgUrl: 'https://artwalk.vteximg.com.br/arquivos/ids/324461-1000-1000/GY947-3-001-1.jpg?v=638060303451070000',
-        }}
-      />
-      <ProductCard
-        product = {{
-          description: 'TÊNIS ADIDAS CAMPUS 00S MASCULINO',
-          price: 549.99,
-          imgUrl: 'https://artwalk.vteximg.com.br/arquivos/ids/324461-1000-1000/GY947-3-001-1.jpg?v=638060303451070000',
-        }}
-      />
-      <ProductCard
-        product = {{
-          description: 'TÊNIS ADIDAS CAMPUS 00S MASCULINO',
-          price: 549.99,
-          imgUrl: 'https://artwalk.vteximg.com.br/arquivos/ids/324461-1000-1000/GY947-3-001-1.jpg?v=638060303451070000',
-        }}
-      />
-      <ProductCard
-        product = {{
-          description: 'TÊNIS ADIDAS CAMPUS 00S MASCULINO',
-          price: 549.99,
-          imgUrl: 'https://artwalk.vteximg.com.br/arquivos/ids/324461-1000-1000/GY947-3-001-1.jpg?v=638060303451070000',
-        }}
-      />
+      {
+        isLoading 
+        ? <Loading />
+        : products.map(product => <ProductCard key={product.id} product={product} />)
+      }
     </View>
   );
 }
