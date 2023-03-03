@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mobile",
+    "name": "COGNYSHOES",
     "slug": "mobile",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "mobile"
+  "name": "COGNYSHOES"
 }
